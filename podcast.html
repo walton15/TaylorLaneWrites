@@ -317,18 +317,26 @@
   .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
   .mobile-nav {
-    display: none;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 0; left: 0; right: 0;
     background: rgba(13,20,16,0.97);
     backdrop-filter: blur(12px);
     z-index: 15;
     padding: 6rem 6vw 3rem;
-    flex-direction: column;
     gap: 0;
     border-bottom: 1px solid rgba(201,168,76,0.15);
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
   }
-  .mobile-nav.open { display: flex; }
+  .mobile-nav.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
   .mobile-nav a {
     color: var(--parchment-dim);
     text-decoration: none;
@@ -337,10 +345,18 @@
     letter-spacing: 0.1em;
     padding: 0.9rem 0;
     border-bottom: 1px solid rgba(186,176,156,0.1);
-    transition: color 0.3s;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: color 0.3s, opacity 0.3s ease, transform 0.3s ease;
   }
   .mobile-nav a:last-child { border-bottom: none; }
   .mobile-nav a:hover { color: var(--gold); }
+  .mobile-nav.open a:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+  .mobile-nav.open a:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
+  .mobile-nav.open a:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.15s; }
+  .mobile-nav.open a:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.2s; }
+  .mobile-nav.open a:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.25s; }
+  .mobile-nav.open a:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.3s; }
 
   @media (max-width: 860px) {
     .nav-links { display: none; }
@@ -405,6 +421,15 @@
     hamburger.classList.toggle('open');
     mobileNav.classList.toggle('open');
   });
+  function closeMobileNav() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  }
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+      closeMobileNav();
+    }
+  });
 </script>
 
 <!-- PAGE HERO -->
@@ -413,7 +438,7 @@
     <div class="eyebrow">Taylor Lane</div>
     <h1>A Grain of <em>Sanderson</em></h1>
     <p>From the fantasy epics of the Cosmere to the defunct mobile game companion books, Graham, Jack, and Taylor attempt to read every published work by Brandon Sanderson, in publication order. We hope to gain a better understanding of who he is as an author, how his writing changes over time, and his broader effect on the fantasy genre. Starting with Elantris and finishing half a decade from now, please join us as we travel out of the wardrobe, and onto the wagon train.</p>
-    <a href="https://agrainofsanderson.buzzsprout.com/" class="btn-primary" style="padding: 0.7rem 1.4rem;" target="_blank" rel="noopener">Subscribe on Buzzsprout</a>
+    <a href="https://agrainofsanderson.buzzsprout.com/" class="btn-primary" style="padding: 0.7rem 1.4rem; align-self: flex-start;" target="_blank" rel="noopener">Subscribe on Buzzsprout</a>
   </div>
   <img
     class="podcast-logo-img"
@@ -450,7 +475,15 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="sign">Taylor Lane</div>
+  <a href="index.html" style="text-decoration:none;">
+    <svg width="44" height="44" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="26" cy="26" r="24" stroke="#c9a84c" stroke-width="0.9"/>
+      <circle cx="26" cy="26" r="20.5" stroke="#c9a84c" stroke-width="0.4" stroke-dasharray="2 3"/>
+      <path d="M26 6 C 23 10, 23 13, 26 17 C 29 13, 29 10, 26 6Z" stroke="#8ba888" stroke-width="0.8" fill="none"/>
+      <path d="M26 35 C 23 39, 23 42, 26 46 C 29 42, 29 39, 26 35Z" stroke="#8ba888" stroke-width="0.8" fill="none"/>
+      <text x="26" y="31" font-family="EB Garamond, serif" font-size="13" font-weight="500" fill="#d8bd6e" text-anchor="middle" letter-spacing="1">T·L</text>
+    </svg>
+  </a>
   <div class="copy">© 2026 Taylor Lane · All rights reserved</div>
 </footer>
 
