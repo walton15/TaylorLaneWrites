@@ -203,18 +203,10 @@
   /* ── EPISODES ── */
   .section { padding: 3rem 6vw 5rem; }
   .episodes-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    padding-bottom: 1rem;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(201,168,76,0.25) transparent;
   }
-  .episodes-grid::-webkit-scrollbar { height: 4px; }
-  .episodes-grid::-webkit-scrollbar-track { background: transparent; }
-  .episodes-grid::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 2px; }
-  .episode-card { flex: 0 0 260px; }
   .episode-card {
     border-top: 1px solid rgba(186,176,156,0.15);
     padding: 1.8rem 1.5rem 1.8rem 0;
@@ -305,8 +297,7 @@
     .nav-links { display: none; }
     .page-hero { grid-template-columns: 1fr; }
     .podcast-logo-img { width: 160px; height: 160px; margin: 0 auto; }
-    .episodes-grid { flex-wrap: wrap; }
-    .episode-card { flex: 0 0 100%; }
+    .episodes-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -400,7 +391,7 @@
   (async function loadEpisodes() {
     const FEED = 'https://feeds.buzzsprout.com/2312274.rss';
     const PROXY = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(FEED);
-    const LIMIT = 10;
+    const LIMIT = 8;
     const list = document.getElementById('episodes-list');
 
     async function fetchFeed(url) {
