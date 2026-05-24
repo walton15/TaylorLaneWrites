@@ -123,24 +123,10 @@
     grid-template-columns: 1fr auto;
     gap: 3.5rem;
     align-items: center;
-    position: relative;
-    overflow: hidden;
   }
-  .page-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('https://storage.buzzsprout.com/58h8r349tzp1a450aik91naeylvs');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.08;
-    filter: blur(2px) grayscale(0.4);
-    z-index: 0;
-  }
-  .page-hero > * { position: relative; z-index: 1; }
   .podcast-logo-img {
-    width: 220px;
-    height: 220px;
+    width: 320px;
+    height: 320px;
     border-radius: 16px;
     object-fit: cover;
     border: 1px solid rgba(201,168,76,0.2);
@@ -310,7 +296,7 @@
   @media (max-width: 860px) {
     .nav-links { display: none; }
     .page-hero { grid-template-columns: 1fr; }
-    .podcast-logo-img { width: 160px; height: 160px; margin: 0 auto; }
+    .podcast-logo-img { width: 200px; height: 200px; margin: 0 auto; }
     .episodes-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -360,7 +346,7 @@
     <div class="eyebrow">Taylor Lane</div>
     <h1>A Grain of <em>Sanderson</em></h1>
     <p>From the fantasy epics of the Cosmere to the defunct mobile game companion books, Graham, Jack, and Taylor attempt to read every published work by Brandon Sanderson, in publication order. We hope to gain a better understanding of who he is as an author, how his writing changes over time, and his broader effect on the fantasy genre. Starting with Elantris and finishing half a decade from now, please join us as we travel out of the wardrobe, and onto the wagon train.</p>
-    <a href="https://agrainofsanderson.buzzsprout.com/" class="btn-primary" target="_blank" rel="noopener">Subscribe on Buzzsprout</a>
+    <a href="https://agrainofsanderson.buzzsprout.com/" class="btn-primary" style="padding: 0.7rem 1.4rem;" target="_blank" rel="noopener">Subscribe on Buzzsprout</a>
   </div>
   <img
     class="podcast-logo-img"
