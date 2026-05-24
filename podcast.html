@@ -189,10 +189,18 @@
   /* ── EPISODES ── */
   .section { padding: 3rem 6vw 5rem; }
   .episodes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 0;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201,168,76,0.25) transparent;
   }
+  .episodes-grid::-webkit-scrollbar { height: 4px; }
+  .episodes-grid::-webkit-scrollbar-track { background: transparent; }
+  .episodes-grid::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 2px; }
+  .episode-card { flex: 0 0 260px; }
   .episode-card {
     border-top: 1px solid rgba(186,176,156,0.15);
     padding: 1.8rem 1.5rem 1.8rem 0;
@@ -281,7 +289,8 @@
 
   @media (max-width: 860px) {
     .nav-links { display: none; }
-    .episodes-grid { grid-template-columns: 1fr; }
+    .episodes-grid { flex-wrap: wrap; }
+    .episode-card { flex: 0 0 100%; }
   }
 </style>
 </head>
