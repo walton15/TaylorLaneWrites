@@ -518,7 +518,9 @@
 
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; }
-    .hero-art { max-width: 300px; margin: 0 auto; }
+    .hero-art { width: 100%; max-width: 100%; margin: 0 auto; }
+    .portrait-frame { aspect-ratio: 4/5; }
+    .portrait-photo { border-radius: 4px; }
     .updates { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
@@ -607,7 +609,6 @@
         alt="Taylor Lane author photo"
       >
     </div>
-    <div class="float-tag">Author</div>
   </div>
 </header>
 
