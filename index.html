@@ -449,99 +449,6 @@
   }
   .social-card:hover svg { opacity: 1; }
 
-  /* ── PODCAST ── */
-  .podcast-intro {
-    display: flex;
-    align-items: flex-start;
-    gap: 2.5rem;
-    margin-bottom: 3rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(186,176,156,0.12);
-    flex-wrap: wrap;
-  }
-  .podcast-info { flex: 1; min-width: 200px; }
-  .podcast-info p {
-    font-size: 1rem;
-    color: var(--parchment-dim);
-    margin-bottom: 1.5rem;
-    max-width: 36rem;
-  }
-  .episodes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 0;
-  }
-  .episode-card {
-    border-top: 1px solid rgba(186,176,156,0.15);
-    padding: 1.8rem 1.5rem 1.8rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    transition: transform 0.4s ease;
-  }
-  .episode-card:hover { transform: translateY(-5px); }
-  .episode-meta {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .episode-tag {
-    font-size: 0.63rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .episode-date {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--sage);
-  }
-  .episode-duration {
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    color: var(--parchment-dim);
-    opacity: 0.6;
-  }
-  .episode-card h3 {
-    font-family: var(--display);
-    font-size: 1.4rem;
-    font-weight: 500;
-    line-height: 1.2;
-    color: var(--parchment);
-  }
-  .episode-card p {
-    font-size: 0.9rem;
-    color: var(--parchment-dim);
-    flex: 1;
-  }
-  .episode-card a {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--sage);
-    text-decoration: none;
-    transition: color 0.4s;
-    margin-top: 0.3rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .episode-card a:hover { color: var(--gold); }
-  .episodes-footer {
-    margin-top: 3rem;
-    text-align: center;
-  }
-  .episodes-loading, .episodes-error {
-    font-size: 0.85rem;
-    color: var(--parchment-dim);
-    letter-spacing: 0.1em;
-    padding: 2rem 0;
-    grid-column: 1 / -1;
-  }
-  .episodes-error a { color: var(--gold); text-decoration: none; }
-
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid rgba(186,176,156,0.15);
@@ -606,7 +513,7 @@
     <a href="#coming-soon">Coming Soon</a>
     <a href="#events">Events</a>
     <a href="#">Books</a>
-    <a href="#podcast">Podcast</a>
+    <a href="podcast.html">Podcast</a>
     <a href="#">About</a>
     <a href="#find-me">Find Me</a>
   </div>
@@ -673,26 +580,6 @@
   </div>
 </section>
 
-<!-- PODCAST -->
-<section class="section" id="podcast">
-  <div class="section-head">
-    <h2>The Podcast</h2>
-    <span class="num">— A Grain of Sanderson</span>
-  </div>
-  <div class="podcast-intro">
-    <div class="podcast-info">
-      <p>A deep-dive fantasy podcast exploring the worlds, magic systems, and storytelling craft of Brandon Sanderson and beyond. New episodes every week.</p>
-      <a href="https://agrainofsanderson.buzzsprout.com/" class="btn-primary" target="_blank" rel="noopener">Visit the Podcast</a>
-    </div>
-  </div>
-  <div class="episodes-grid" id="episodes-list">
-    <p class="episodes-loading">Loading episodes…</p>
-  </div>
-  <div class="episodes-footer">
-    <a href="https://agrainofsanderson.buzzsprout.com/" class="btn-text" target="_blank" rel="noopener">View all episodes →</a>
-  </div>
-</section>
-
 <!-- NEWSLETTER -->
 <section class="newsletter-band">
   <div class="eyebrow">Stay in the Story</div>
@@ -745,62 +632,5 @@
   <div class="copy">© 2026 Taylor Lane · All rights reserved</div>
 </footer>
 
-<script>
-  (async function loadEpisodes() {
-    const FEED = 'https://feeds.buzzsprout.com/2312274.rss';
-    const PROXY = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(FEED);
-    const LIMIT = 5;
-    const list = document.getElementById('episodes-list');
-
-    async function fetchFeed(url) {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('fetch failed');
-      return res.text();
-    }
-
-    let xml;
-    try {
-      const text = await fetchFeed(FEED).catch(() => fetchFeed(PROXY));
-      xml = new DOMParser().parseFromString(text, 'text/xml');
-    } catch {
-      list.innerHTML = '<p class="episodes-error">Could not load episodes. <a href="https://agrainofsanderson.buzzsprout.com/" target="_blank" rel="noopener">Visit the podcast →</a></p>';
-      return;
-    }
-
-    const items = Array.from(xml.querySelectorAll('item')).slice(0, LIMIT);
-    if (!items.length) {
-      list.innerHTML = '<p class="episodes-error"><a href="https://agrainofsanderson.buzzsprout.com/" target="_blank" rel="noopener">Visit the podcast →</a></p>';
-      return;
-    }
-
-    list.innerHTML = items.map(item => {
-      const title = item.querySelector('title')?.textContent?.trim() || 'Untitled';
-      const pubDate = item.querySelector('pubDate')?.textContent || '';
-      const link = item.querySelector('link')?.textContent?.trim() ||
-                   item.querySelector('enclosure')?.getAttribute('url') ||
-                   'https://agrainofsanderson.buzzsprout.com/';
-      const rawDesc = item.querySelector('description')?.textContent || '';
-      const duration = item.querySelector('itunes\\:duration')?.textContent?.trim() || '';
-
-      const tmp = document.createElement('div');
-      tmp.innerHTML = rawDesc;
-      const desc = (tmp.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 150);
-      const excerpt = desc.length === 150 ? desc + '…' : desc;
-
-      const date = pubDate ? new Date(pubDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '';
-
-      return `<article class="episode-card">
-        <div class="episode-meta">
-          <span class="episode-tag">Episode</span>
-          ${date ? `<span class="episode-date">${date}</span>` : ''}
-          ${duration ? `<span class="episode-duration">${duration}</span>` : ''}
-        </div>
-        <h3>${title}</h3>
-        ${excerpt ? `<p>${excerpt}</p>` : ''}
-        <a href="${link}" target="_blank" rel="noopener">Listen →</a>
-      </article>`;
-    }).join('');
-  })();
-</script>
 </body>
 </html>
