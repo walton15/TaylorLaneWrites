@@ -120,10 +120,24 @@
     opacity: 0;
     animation: rise 1.2s 0.15s cubic-bezier(0.2,0.8,0.2,1) forwards;
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr auto;
     gap: 3.5rem;
     align-items: center;
+    position: relative;
+    overflow: hidden;
   }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('https://storage.buzzsprout.com/58h8r349tzp1a450aik91naeylvs');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+    filter: blur(2px) grayscale(0.4);
+    z-index: 0;
+  }
+  .page-hero > * { position: relative; z-index: 1; }
   .podcast-logo-img {
     width: 220px;
     height: 220px;
