@@ -467,11 +467,61 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 20;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--parchment-dim);
+    transition: all 0.35s ease;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(13,20,16,0.97);
+    backdrop-filter: blur(12px);
+    z-index: 15;
+    padding: 6rem 6vw 3rem;
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    color: var(--parchment-dim);
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-family: var(--display);
+    letter-spacing: 0.1em;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(186,176,156,0.1);
+    transition: color 0.3s;
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav a:hover { color: var(--gold); }
+
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; }
     .hero-art { max-width: 300px; margin: 0 auto; }
     .updates { grid-template-columns: 1fr; }
     .nav-links { display: none; }
+    .hamburger { display: flex; }
     .socials-grid { gap: 1rem; }
     .social-card { min-width: 140px; padding: 1rem 1.4rem; }
   }
@@ -517,7 +567,32 @@
     <a href="#">About</a>
     <a href="#find-me">Find Me</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#coming-soon" onclick="closeMobileNav()">Coming Soon</a>
+  <a href="#events" onclick="closeMobileNav()">Events</a>
+  <a href="#" onclick="closeMobileNav()">Books</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="#" onclick="closeMobileNav()">About</a>
+  <a href="#find-me" onclick="closeMobileNav()">Find Me</a>
+</div>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  function closeMobileNav() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  }
+</script>
 
 <!-- HERO -->
 <header class="hero">
