@@ -216,21 +216,15 @@
     border: 1px solid rgba(201,168,76,0.2);
     border-radius: 2px;
   }
-  .portrait-placeholder {
-    width: 110px; height: 110px;
-    border-radius: 50%;
-    border: 1px solid rgba(201,168,76,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-    background: rgba(201,168,76,0.05);
-  }
-  .portrait-monogram {
-    font-family: var(--display);
-    font-size: 2.8rem;
-    color: var(--gold-soft);
-    letter-spacing: 0.05em;
+  .portrait-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    opacity: 0.85;
+    filter: sepia(0.2) saturate(0.8);
   }
   .portrait-name {
     font-family: var(--display);
@@ -536,11 +530,13 @@
   </div>
   <div class="hero-art">
     <div class="portrait-frame">
-      <div class="portrait-placeholder">
-        <span class="portrait-monogram">TL</span>
-      </div>
-      <div class="portrait-name">Taylor<br>Lane</div>
-      <div class="portrait-genre">Fantasy · Epic · Mythology</div>
+      <img
+        class="portrait-photo"
+        src="https://placehold.co/400x530/1f3326/d8bd6e?text=Author+Photo"
+        alt="Taylor Lane author photo placeholder"
+      >
+      <div class="portrait-name" style="position:relative;z-index:1;">Taylor<br>Lane</div>
+      <div class="portrait-genre" style="position:relative;z-index:1;">Fantasy · Epic · Mythology</div>
     </div>
     <div class="float-tag">Author</div>
   </div>
