@@ -119,7 +119,21 @@
     padding: 5rem 6vw 4rem;
     opacity: 0;
     animation: rise 1.2s 0.15s cubic-bezier(0.2,0.8,0.2,1) forwards;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3.5rem;
+    align-items: center;
   }
+  .podcast-logo-img {
+    width: 220px;
+    height: 220px;
+    border-radius: 16px;
+    object-fit: cover;
+    border: 1px solid rgba(201,168,76,0.2);
+    box-shadow: 0 20px 60px -10px rgba(0,0,0,0.6);
+    flex-shrink: 0;
+  }
+  .page-hero-text { display: flex; flex-direction: column; }
   .eyebrow {
     font-size: 0.8rem;
     letter-spacing: 0.4em;
@@ -289,6 +303,8 @@
 
   @media (max-width: 860px) {
     .nav-links { display: none; }
+    .page-hero { grid-template-columns: 1fr; }
+    .podcast-logo-img { width: 160px; height: 160px; margin: 0 auto; }
     .episodes-grid { flex-wrap: wrap; }
     .episode-card { flex: 0 0 100%; }
   }
@@ -335,10 +351,17 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="eyebrow">Taylor Lane</div>
-  <h1>A Grain of <em>Sanderson</em></h1>
-  <p>From the fantasy epics of the Cosmere to the defunct mobile game companion books, Graham, Jack, and Taylor attempt to read every published work by Brandon Sanderson, in publication order. We hope to gain a better understanding of who he is as an author, how his writing changes over time, and his broader effect on the fantasy genre. Starting with Elantris and finishing half a decade from now, please join us as we travel out of the wardrobe, and onto the wagon train.</p>
-  <a href="https://agrainofsanderson.buzzsprout.com/" class="btn-primary" target="_blank" rel="noopener">Subscribe on Buzzsprout</a>
+  <div class="page-hero-text">
+    <div class="eyebrow">Taylor Lane</div>
+    <h1>A Grain of <em>Sanderson</em></h1>
+    <p>From the fantasy epics of the Cosmere to the defunct mobile game companion books, Graham, Jack, and Taylor attempt to read every published work by Brandon Sanderson, in publication order. We hope to gain a better understanding of who he is as an author, how his writing changes over time, and his broader effect on the fantasy genre. Starting with Elantris and finishing half a decade from now, please join us as we travel out of the wardrobe, and onto the wagon train.</p>
+    <a href="https://agrainofsanderson.buzzsprout.com/" class="btn-primary" target="_blank" rel="noopener">Subscribe on Buzzsprout</a>
+  </div>
+  <img
+    class="podcast-logo-img"
+    src="https://storage.buzzsprout.com/58h8r349tzp1a450aik91naeylvs"
+    alt="A Grain of Sanderson podcast logo"
+  >
 </div>
 
 <!-- DIVIDER -->
